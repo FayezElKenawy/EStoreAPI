@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("add")]
+        [HttpPost("add")]
         public IActionResult Add(Country country)
         {
             var result = _countryService.Add(country);
@@ -59,7 +59,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("update")]
+        [HttpPost("update")]
         public IActionResult Update(Country country)
         {
             var result = _countryService.Update(country);
@@ -72,7 +72,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("delete")]
+        [HttpPost("delete")]
         public IActionResult Delete(Country country)
         {
             var result = _countryService.Delete(country);
