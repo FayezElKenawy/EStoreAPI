@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -32,7 +33,14 @@ namespace Business.Concrete
 
         public IDataResult<Country> GetById(int id)
         {
-            return new SuccessDataResult<Country>(_countryDal.Get(c => c.Id == id), Messages.CountrytDetailsListed);
+            var result = BusinessRules.Run(CheckIfEntityIdValid(id));
+            if (result.Success)
+            {
+                return new SuccessDataResult<Country>(_countryDal.Get(c => c.Id == id), Messages.CountrytDetailsListed);
+            }
+
+            return new ErrorDataResult<Country>();
+
         }
 
         public IDataResult<List<Country>> GetAll()
@@ -44,6 +52,19 @@ namespace Business.Concrete
         {
             _countryDal.Update(country);
             return new SuccessResult(Messages.CountryUpdated);
+        }
+
+        //Business Rules
+
+        private IResult CheckIfEntityIdValid(int id)
+        {
+            var result = _countryDal.Get(c => c.Id == id);
+            if (result != null)
+            {
+                return new SuccessResult();
+            }
+
+            return new ErrorResult();
         }
     }
 }
