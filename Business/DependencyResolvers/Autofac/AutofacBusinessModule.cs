@@ -14,7 +14,10 @@ namespace Business.DependencyResolvers.Autofac
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<CountryManager>().As<ICountryService>().SingleInstance();
-            builder.RegisterType<EfCountryDal>().As<ICityDal>().SingleInstance();
+            builder.RegisterType<EfCountryDal>().As<ICountryDal>().SingleInstance();
+
+            builder.RegisterType<CityManager>().As<ICityService>().SingleInstance();
+            builder.RegisterType<EfCityDal>().As<ICityDal>().SingleInstance();
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Business.Concrete
         public IDataResult<City> GetById(int id)
         {
             var result = BusinessRules.Run(CheckIfEntityIdValid(id));
-            if (result.Success)
+            if (result == null)
             {
                 return new SuccessDataResult<City>(_cityDal.Get(c => c.Id == id), Messages.CityDetailsListed);
             }
