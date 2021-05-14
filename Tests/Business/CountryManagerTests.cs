@@ -42,7 +42,6 @@ namespace Tests.Business
         [TestMethod]
         public void GetById_InvalidId_ReturnError()
         {
-            ICountryService countryService = new CountryManager(_mockCountryDal.Object);
             var result = _mockCountries.SingleOrDefault(c => c.Id == 4);
             Assert.IsNull(result);
         }

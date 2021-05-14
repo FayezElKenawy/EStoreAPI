@@ -14,5 +14,6 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         }
 
         public DbSet<Country> Countries { get; set; }
+        public DbSet<City> Cities { get; set; }
     }
 }
