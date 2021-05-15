@@ -22,6 +22,8 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CityValidator))]
         public IResult Add(City city)
         {
+            city.CreateDate = System.DateTime.Now;
+            city.Active = true;
             _cityDal.Add(city);
             return new SuccessResult(Messages.CityAdded);
         }

@@ -6,6 +6,7 @@ using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using System;
 using System.Collections.Generic;
 
 namespace Business.Concrete
@@ -22,6 +23,8 @@ namespace Business.Concrete
         [ValidationAspect(typeof(BrandValidator))]
         public IResult Add(Brand brand)
         {
+            brand.CreateDate = DateTime.Now;
+            brand.Active = true;
             _brandDal.Add(brand);
             return new SuccessResult(Messages.BrandAdded);
         }

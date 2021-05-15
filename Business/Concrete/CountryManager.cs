@@ -6,7 +6,6 @@ using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
-using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -24,6 +23,8 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CountryValidator))]
         public IResult Add(Country country)
         {
+            country.CreateDate = System.DateTime.Now;
+            country.Active = true;
             _countryDal.Add(country);
             return new SuccessResult(Messages.CountryAdded);
         }

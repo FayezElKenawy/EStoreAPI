@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\Concrete\" />
+    <Compile Remove="Entities\Concrete\**" />
+    <EmbeddedResource Remove="Entities\Concrete\**" />
+    <None Remove="Entities\Concrete\**" />
   </ItemGroup>
 
   <ItemGroup>

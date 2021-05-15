@@ -6,6 +6,7 @@ using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using System;
 using System.Collections.Generic;
 
 namespace Business.Concrete
@@ -22,6 +23,8 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CategoryValidator))]
         public IResult Add(Category category)
         {
+            category.CreateDate = DateTime.Now;
+            category.Active = true;
             _categoryDal.Add(category);
             return new SuccessResult(Messages.CategoryAdded);
         }
