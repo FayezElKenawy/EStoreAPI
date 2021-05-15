@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -17,12 +19,14 @@ namespace Business.Concrete
             _cityDal = cityDal;
         }
 
+        [ValidationAspect(typeof(CityValidator))]
         public IResult Add(City city)
         {
             _cityDal.Add(city);
             return new SuccessResult(Messages.CityAdded);
         }
 
+        [ValidationAspect(typeof(CityValidator))]
         public IResult Delete(City city)
         {
             _cityDal.Delete(city);
@@ -45,6 +49,7 @@ namespace Business.Concrete
             return new ErrorDataResult<City>();
         }
 
+        [ValidationAspect(typeof(CityValidator))]
         public IResult Update(City city)
         {
             _cityDal.Update(city);

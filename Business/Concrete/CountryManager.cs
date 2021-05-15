@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -19,12 +21,14 @@ namespace Business.Concrete
             _countryDal = countryDal;
         }
 
+        [ValidationAspect(typeof(CountryValidator))]
         public IResult Add(Country country)
         {
             _countryDal.Add(country);
             return new SuccessResult(Messages.CountryAdded);
         }
 
+        [ValidationAspect(typeof(CountryValidator))]
         public IResult Delete(Country country)
         {
             _countryDal.Delete(country);
@@ -48,6 +52,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Country>>(_countryDal.GetAll(), Messages.CountriesListed);
         }
 
+        [ValidationAspect(typeof(CountryValidator))]
         public IResult Update(Country country)
         {
             _countryDal.Update(country);
