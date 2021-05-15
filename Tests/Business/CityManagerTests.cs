@@ -1,7 +1,9 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
+using Business.ValidationRules.FluentValidation;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using FluentValidation.TestHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
@@ -16,6 +18,7 @@ namespace Tests.Business
     {
         private Mock<ICityDal> _mockCityDal;
         private List<City> _mockCities;
+        private CityValidator _validator;
 
         [TestInitialize]
         public void Setup()
@@ -27,6 +30,7 @@ namespace Tests.Business
                 new City{Id=2, CountryId=1, Name="City2", CreateDate=DateTime.Now, Active=true},
                 new City{Id=3, CountryId=1, Name="City3", CreateDate=DateTime.Now, Active=true}
             };
+            _validator = new CityValidator();
 
             _mockCityDal.Setup(m => m.GetAll(null)).Returns(_mockCities);
         }
@@ -62,6 +66,21 @@ namespace Tests.Business
             Assert.IsTrue(result.Success);
         }
 
+        [TestMethod]
+        public void InvalidParameters_ThrowValidationException()
+        {
+            City city = new City
+            {
+                Id = 1,
+                CountryId = 0,
+                Name = "C",
+                CreateDate = DateTime.Now,
+                Active = true
+            };
+
+            var result = _validator.TestValidate(city);
+            result.ShouldHaveAnyValidationError();
+        }
 
         [TestMethod]
         public void Update_UpdateCity_ReturnTrueResult()

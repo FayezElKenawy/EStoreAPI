@@ -1,7 +1,9 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
+using Business.ValidationRules.FluentValidation;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using FluentValidation.TestHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
@@ -16,6 +18,7 @@ namespace Tests.Business
     {
         private Mock<ICountryDal> _mockCountryDal;
         private List<Country> _mockCountries;
+        private CountryValidator _validator;
 
         [TestInitialize]
         public void Setup()
@@ -27,6 +30,7 @@ namespace Tests.Business
                 new Country{Id=2, Name="Country2", CreateDate=DateTime.Now, Active=true},
                 new Country{Id=3, Name="Country3", CreateDate=DateTime.Now, Active=true}
             };
+            _validator = new CountryValidator();
 
             _mockCountryDal.Setup(m => m.GetAll(null)).Returns(_mockCountries);
         }
@@ -59,6 +63,21 @@ namespace Tests.Business
             };
             var result = countryService.Add(country);
             Assert.IsTrue(result.Success);
+        }
+
+        [TestMethod]
+        public void InvalidParameters_ThrowValidationException()
+        {
+            Country country = new Country
+            {
+                Id = 1,
+                Name = "C",
+                CreateDate = DateTime.Now,
+                Active = true
+            };
+
+            var result = _validator.TestValidate(country);
+            result.ShouldHaveAnyValidationError();
         }
 
         [TestMethod]

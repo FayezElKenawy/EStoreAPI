@@ -8,7 +8,7 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using System.Collections.Generic;
 
-namespace Business
+namespace Business.Concrete
 {
     public class CategoryManager : ICategoryService
     {

@@ -1,5 +1,6 @@
-﻿using Business;
+﻿using Business.Concrete;
 using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FluentValidation.TestHelper;
 
 namespace Tests.Business
 {
@@ -16,6 +18,7 @@ namespace Tests.Business
     {
         private Mock<ICategoryDal> _mockCategoryDal;
         private List<Category> _mockCategories;
+        private CategoryValidator _validator;
 
         [TestInitialize]
         public void Setup()
@@ -27,9 +30,9 @@ namespace Tests.Business
                 new Category{Id=2, Name="Category2", CreateDate=DateTime.Now, Active=true},
                 new Category{Id=3, Name="Category3", CreateDate=DateTime.Now, Active=true}
             };
+            _validator = new CategoryValidator();
 
             _mockCategoryDal.Setup(m => m.GetAll(null)).Returns(_mockCategories);
-
         }
 
         [TestMethod]
@@ -62,6 +65,20 @@ namespace Tests.Business
             Assert.IsTrue(result.Success);
         }
 
+        [TestMethod]
+        public void InvalidParameters_ThrowValidationException()
+        {
+            Category category = new Category
+            {
+                Id = 1,
+                Name = "C",
+                CreateDate = DateTime.Now,
+                Active = true
+            };
+
+            var result = _validator.TestValidate(category);
+            result.ShouldHaveAnyValidationError();
+        }
 
         [TestMethod]
         public void Update_CategoryUpdate_ReturnTrueResult()

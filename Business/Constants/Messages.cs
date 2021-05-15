@@ -23,5 +23,11 @@ namespace Business.Constants
         public static string CategoryAdded = "Kateqoriya əlavə edildi";
         public static string CategoryUpdated = "Kateqoriya güncəlləndi";
         public static string CategoryDeleted = "Kateqoriya silindi";
+
+        public static string BrandsListed = "Markalar listələndi";
+        public static string BrandDetailsListed = "Marka məlumatları listələndi";
+        public static string BrandAdded = "Marka əlavə edildi";
+        public static string BrandUpdated = "Marka güncəlləndi";
+        public static string BrandDeleted = "Marka silindi";
     }
 }
