@@ -17,5 +17,11 @@ namespace Business.Constants
         public static string CityAdded = "Şəhər əlavə edildi";
         public static string CityUpdated = "Şəhər güncəlləndi";
         public static string CityDeleted = "Şəhər silindi";
+
+        public static string CategoriesListed = "Kateqoriyalar listələndi";
+        public static string CategoryDetailsListed = "Kateqoriya məlumatları listələndi";
+        public static string CategoryAdded = "Kateqoriya əlavə edildi";
+        public static string CategoryUpdated = "Kateqoriya güncəlləndi";
+        public static string CategoryDeleted = "Kateqoriya silindi";
     }
 }

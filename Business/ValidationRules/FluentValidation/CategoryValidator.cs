@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    public class CountryValidator : AbstractValidator<Country>
+    public class CategoryValidator : AbstractValidator<Category>
     {
-        public CountryValidator()
+        public CategoryValidator()
         {
             RuleFor(c => c.Name).NotEmpty();
             RuleFor(c => c.Name).MinimumLength(2);
