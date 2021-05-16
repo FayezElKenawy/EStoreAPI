@@ -3,12 +3,12 @@ using Business.Abstract;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using Entities.Concrete;
 using Moq;
 using DataAccess.Abstract;
 using System.Linq;
 using Business.ValidationRules.FluentValidation;
 using FluentValidation.TestHelper;
+using Core.Entities.Concrete;
 
 namespace Tests.Business
 {
@@ -25,8 +25,8 @@ namespace Tests.Business
             _mockUserDal = new Mock<IUserDal>();
             _mockUsers = new List<User>
             {
-                new User {Id=1, FirstName=It.IsAny<string>(), Email = It.IsAny<string>(), LastName=It.IsAny<string>(), PasswordHash=It.IsAny<byte[]>(), PasswordSalt=It.IsAny<byte[]>(), CreateDate=DateTime.Now, Active=true },
-                new User {Id=2, FirstName=It.IsAny<string>(), Email = It.IsAny<string>(), LastName=It.IsAny<string>(), PasswordHash=It.IsAny<byte[]>(), PasswordSalt=It.IsAny<byte[]>(), CreateDate=DateTime.Now, Active=true }
+                new User {Id=1, FirstName=It.IsAny<string>(), Email = It.IsAny<string>(), LastName=It.IsAny<string>(), PasswordHash=It.IsAny<byte[]>(), PasswordSalt=It.IsAny<byte[]>(), Status=true },
+                new User {Id=2, FirstName=It.IsAny<string>(), Email = It.IsAny<string>(), LastName=It.IsAny<string>(), PasswordHash=It.IsAny<byte[]>(), PasswordSalt=It.IsAny<byte[]>(), Status=true }
             };
             _validator = new UserValidator();
 
@@ -60,8 +60,7 @@ namespace Tests.Business
                 LastName = It.IsAny<string>(),
                 PasswordHash = It.IsAny<byte[]>(),
                 PasswordSalt = It.IsAny<byte[]>(),
-                CreateDate = DateTime.Now,
-                Active = true
+                Status = true
             };
 
             var result = userService.Add(user);
@@ -79,8 +78,7 @@ namespace Tests.Business
                 LastName = "L",
                 PasswordHash = It.IsAny<byte[]>(),
                 PasswordSalt = It.IsAny<byte[]>(),
-                CreateDate = DateTime.Now,
-                Active = true
+                Status = true
             };
 
             var result = _validator.TestValidate(user);
@@ -99,8 +97,7 @@ namespace Tests.Business
                 LastName = It.IsAny<string>(),
                 PasswordHash = It.IsAny<byte[]>(),
                 PasswordSalt = It.IsAny<byte[]>(),
-                CreateDate = DateTime.Now,
-                Active = true
+                Status = true
             };
 
             var result = userService.Update(user);
@@ -119,8 +116,7 @@ namespace Tests.Business
                 LastName = It.IsAny<string>(),
                 PasswordHash = It.IsAny<byte[]>(),
                 PasswordSalt = It.IsAny<byte[]>(),
-                CreateDate = DateTime.Now,
-                Active = true
+                Status = true
             };
 
             var result = userService.Delete(user);
