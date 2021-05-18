@@ -42,6 +42,6 @@ namespace Business.Constants
         public static string UserDeleted = "istifadəçi silindi";
         public static string UserUpdated = "İstifadəçi güncəlləndi";
 
-        public static string GivenUserOperationClaimsListed { get; internal set; }
+        public static string GivenUserOperationClaimsListed = "İstifadəçi icazələri listələndi";
     }
 }
