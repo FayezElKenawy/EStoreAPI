@@ -30,19 +30,19 @@ namespace Business.Concrete
             product.CreateDate = DateTime.Now;
             product.Active = true;
             _productDal.Add(product);
-            return new SuccessResult(Messages.ProductAdded);
+            return new SuccessResult(BusinessMessages.ProductAdded);
         }
 
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Delete(Product product)
         {
             _productDal.Delete(product);
-            return new SuccessResult(Messages.ProductDeleted);
+            return new SuccessResult(BusinessMessages.ProductDeleted);
         }
 
         public IDataResult<List<Product>> GetAll()
         {
-            return new SuccessDataResult<List<Product>>(_productDal.GetAll(), Messages.ProductsListed);
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll(), BusinessMessages.ProductsListed);
         }
 
         public IDataResult<Product> GetById(int id)
@@ -50,7 +50,7 @@ namespace Business.Concrete
             var result = BusinessRules.Run(CheckIfEntityIdValid(id));
             if (result == null)
             {
-                return new SuccessDataResult<Product>(_productDal.Get(c => c.Id == id), Messages.ProductDetailsListed);
+                return new SuccessDataResult<Product>(_productDal.Get(c => c.Id == id), BusinessMessages.ProductDetailsListed);
             }
 
             return new ErrorDataResult<Product>();
@@ -60,7 +60,7 @@ namespace Business.Concrete
         public IResult Update(Product product)
         {
             _productDal.Update(product);
-            return new SuccessResult(Messages.ProductUpdated);
+            return new SuccessResult(BusinessMessages.ProductUpdated);
         }
 
         //Business Rules

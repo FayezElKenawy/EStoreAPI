@@ -26,19 +26,19 @@ namespace Business.Concrete
             brand.CreateDate = DateTime.Now;
             brand.Active = true;
             _brandDal.Add(brand);
-            return new SuccessResult(Messages.BrandAdded);
+            return new SuccessResult(BusinessMessages.BrandAdded);
         }
 
         [ValidationAspect(typeof(BrandValidator))]
         public IResult Delete(Brand brand)
         {
             _brandDal.Delete(brand);
-            return new SuccessResult(Messages.BrandDeleted);
+            return new SuccessResult(BusinessMessages.BrandDeleted);
         }
 
         public IDataResult<List<Brand>> GetAll()
         {
-            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), Messages.BrandsListed);
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), BusinessMessages.BrandsListed);
         }
 
         public IDataResult<Brand> GetById(int id)
@@ -46,7 +46,7 @@ namespace Business.Concrete
             var result = BusinessRules.Run(CheckIfEntityIdValid(id));
             if (result == null)
             {
-                return new SuccessDataResult<Brand>(_brandDal.Get(c => c.Id == id), Messages.BrandDetailsListed);
+                return new SuccessDataResult<Brand>(_brandDal.Get(c => c.Id == id), BusinessMessages.BrandDetailsListed);
             }
 
             return new ErrorDataResult<Brand>();
@@ -56,7 +56,7 @@ namespace Business.Concrete
         public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
-            return new SuccessResult(Messages.BrandUpdated);
+            return new SuccessResult(BusinessMessages.BrandUpdated);
         }
 
         //Business Rules

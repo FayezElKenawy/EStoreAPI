@@ -26,14 +26,14 @@ namespace Business.Concrete
             country.CreateDate = System.DateTime.Now;
             country.Active = true;
             _countryDal.Add(country);
-            return new SuccessResult(Messages.CountryAdded);
+            return new SuccessResult(BusinessMessages.CountryAdded);
         }
 
         [ValidationAspect(typeof(CountryValidator))]
         public IResult Delete(Country country)
         {
             _countryDal.Delete(country);
-            return new SuccessResult(Messages.CountryDeleted);
+            return new SuccessResult(BusinessMessages.CountryDeleted);
         }
 
         public IDataResult<Country> GetById(int id)
@@ -41,7 +41,7 @@ namespace Business.Concrete
             var result = BusinessRules.Run(CheckIfEntityIdValid(id));
             if (result == null)
             {
-                return new SuccessDataResult<Country>(_countryDal.Get(c => c.Id == id), Messages.CountrytDetailsListed);
+                return new SuccessDataResult<Country>(_countryDal.Get(c => c.Id == id), BusinessMessages.CountrytDetailsListed);
             }
 
             return new ErrorDataResult<Country>();
@@ -50,14 +50,14 @@ namespace Business.Concrete
 
         public IDataResult<List<Country>> GetAll()
         {
-            return new SuccessDataResult<List<Country>>(_countryDal.GetAll(), Messages.CountriesListed);
+            return new SuccessDataResult<List<Country>>(_countryDal.GetAll(), BusinessMessages.CountriesListed);
         }
 
         [ValidationAspect(typeof(CountryValidator))]
         public IResult Update(Country country)
         {
             _countryDal.Update(country);
-            return new SuccessResult(Messages.CountryUpdated);
+            return new SuccessResult(BusinessMessages.CountryUpdated);
         }
 
         //Business Rules

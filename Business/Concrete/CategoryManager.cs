@@ -26,19 +26,19 @@ namespace Business.Concrete
             category.CreateDate = DateTime.Now;
             category.Active = true;
             _categoryDal.Add(category);
-            return new SuccessResult(Messages.CategoryAdded);
+            return new SuccessResult(BusinessMessages.CategoryAdded);
         }
 
         [ValidationAspect(typeof(CategoryValidator))]
         public IResult Delete(Category category)
         {
             _categoryDal.Delete(category);
-            return new SuccessResult(Messages.CategoryDeleted);
+            return new SuccessResult(BusinessMessages.CategoryDeleted);
         }
 
         public IDataResult<List<Category>> GetAll()
         {
-            return new SuccessDataResult<List<Category>>(_categoryDal.GetAll(), Messages.CategoriesListed);
+            return new SuccessDataResult<List<Category>>(_categoryDal.GetAll(), BusinessMessages.CategoriesListed);
         }
 
         public IDataResult<Category> GetById(int id)
@@ -46,7 +46,7 @@ namespace Business.Concrete
             var result = BusinessRules.Run(CheckIfEntityIdValid(id));
             if (result == null)
             {
-                return new SuccessDataResult<Category>(_categoryDal.Get(c => c.Id == id), Messages.CategoryDetailsListed);
+                return new SuccessDataResult<Category>(_categoryDal.Get(c => c.Id == id), BusinessMessages.CategoryDetailsListed);
             }
 
             return new ErrorDataResult<Category>();
@@ -56,7 +56,7 @@ namespace Business.Concrete
         public IResult Update(Category category)
         {
             _categoryDal.Update(category);
-            return new SuccessResult(Messages.CategoryUpdated);
+            return new SuccessResult(BusinessMessages.CategoryUpdated);
         }
 
         //Business Rules

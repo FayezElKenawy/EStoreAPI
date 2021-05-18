@@ -20,18 +20,18 @@ namespace Business.Concrete
         public IResult Add(User user)
         {
             _userDal.Add(user);
-            return new SuccessResult(Messages.UserAdded);
+            return new SuccessResult(BusinessMessages.UserAdded);
         }
 
         public IResult Delete(User user)
         {
             _userDal.Add(user);
-            return new SuccessResult(Messages.UserDeleted);
+            return new SuccessResult(BusinessMessages.UserDeleted);
         }
 
         public IDataResult<List<User>> GetAll()
         {
-            return new SuccessDataResult<List<User>>(_userDal.GetAll(), Messages.UsersListed);
+            return new SuccessDataResult<List<User>>(_userDal.GetAll(), BusinessMessages.UsersListed);
         }
 
         public IDataResult<User> GetById(int id)
@@ -39,16 +39,26 @@ namespace Business.Concrete
             var result = BusinessRules.Run(CheckIfEntityIdValid(id));
             if (result == null)
             {
-                return new SuccessDataResult<User>(_userDal.Get(c => c.Id == id), Messages.UserDetailsListed);
+                return new SuccessDataResult<User>(_userDal.Get(c => c.Id == id), BusinessMessages.UserDetailsListed);
             }
 
             return new ErrorDataResult<User>();
         }
 
+        public IDataResult<User> GetByMail(string email)
+        {
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
+        }
+
+        public IDataResult<List<OperationClaim>> GetUserClaims(User user)
+        {
+            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user), BusinessMessages.GivenUserOperationClaimsListed);
+        }
+
         public IResult Update(User user)
         {
             _userDal.Add(user);
-            return new SuccessResult(Messages.UserUpdated);
+            return new SuccessResult(BusinessMessages.UserUpdated);
         }
 
         //Business Rules

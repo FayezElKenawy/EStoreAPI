@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Business.Constants
 {
-    public static class Messages
+    public static class BusinessMessages
     {
         public static string CountryAdded = "Ölkə əlavə edildi";
         public static string CountryDeleted = "Ölkə silindi";
@@ -41,5 +41,7 @@ namespace Business.Constants
         public static string UserDetailsListed = "İstifadəçi məluamtları listələndi";
         public static string UserDeleted = "istifadəçi silindi";
         public static string UserUpdated = "İstifadəçi güncəlləndi";
+
+        public static string GivenUserOperationClaimsListed { get; internal set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -19,25 +20,26 @@ namespace Business.Concrete
             _cityDal = cityDal;
         }
 
+        [SecuredOperation("admin")]
         [ValidationAspect(typeof(CityValidator))]
         public IResult Add(City city)
         {
             city.CreateDate = System.DateTime.Now;
             city.Active = true;
             _cityDal.Add(city);
-            return new SuccessResult(Messages.CityAdded);
+            return new SuccessResult(BusinessMessages.CityAdded);
         }
 
         [ValidationAspect(typeof(CityValidator))]
         public IResult Delete(City city)
         {
             _cityDal.Delete(city);
-            return new SuccessResult(Messages.CityDeleted);
+            return new SuccessResult(BusinessMessages.CityDeleted);
         }
 
         public IDataResult<List<City>> GetAll()
         {
-            return new SuccessDataResult<List<City>>(_cityDal.GetAll(), Messages.CitiesListed);
+            return new SuccessDataResult<List<City>>(_cityDal.GetAll(), BusinessMessages.CitiesListed);
         }
 
         public IDataResult<City> GetById(int id)
@@ -45,7 +47,7 @@ namespace Business.Concrete
             var result = BusinessRules.Run(CheckIfEntityIdValid(id));
             if (result == null)
             {
-                return new SuccessDataResult<City>(_cityDal.Get(c => c.Id == id), Messages.CityDetailsListed);
+                return new SuccessDataResult<City>(_cityDal.Get(c => c.Id == id), BusinessMessages.CityDetailsListed);
             }
 
             return new ErrorDataResult<City>();
@@ -55,7 +57,7 @@ namespace Business.Concrete
         public IResult Update(City city)
         {
             _cityDal.Update(city);
-            return new SuccessResult(Messages.CityUpdated);
+            return new SuccessResult(BusinessMessages.CityUpdated);
         }
 
         //Business Rules
