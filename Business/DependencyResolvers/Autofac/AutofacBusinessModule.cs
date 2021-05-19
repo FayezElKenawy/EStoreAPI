@@ -34,6 +34,9 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EfProductDal>().As<IProductDal>().SingleInstance();
             builder.RegisterType<CodeGeneratorManager>().As<ICodeGeneratorService>().SingleInstance();
 
+            builder.RegisterType<BasketManager>().As<IBasketService>().SingleInstance();
+            builder.RegisterType<EfBasketDal>().As<IBasketDal>().SingleInstance();
+
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
             builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
 

@@ -41,7 +41,12 @@ namespace Business.Constants
         public static string UserDetailsListed = "İstifadəçi məluamtları listələndi";
         public static string UserDeleted = "istifadəçi silindi";
         public static string UserUpdated = "İstifadəçi güncəlləndi";
-
         public static string GivenUserOperationClaimsListed = "İstifadəçi icazələri listələndi";
+
+        public static string BasketAdded = "Səbət əlavə edildi";
+        public static string BasketsListed = "Səbətlər listələndi";
+        public static string BasketDetailsListed = "Səbət məlumatları listələndi";
+        public static string BasketUpdated = "Səbət güncəlləndi";
+        public static string BasketDeleted = "Səbət silindi";
     }
 }
