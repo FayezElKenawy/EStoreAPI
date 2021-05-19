@@ -26,8 +26,8 @@ namespace Tests.Business
             _mockOrderDal = new Mock<IOrderDal>();
             _mockOrders = new List<Order>
             {
-                new Order{Id=1, UserId=It.IsAny<int>(), AddressId=It.IsAny<int>(), OrderStatusId = It.IsAny<int>(), Count=It.IsAny<int>(), CreateDate=DateTime.Now, Active=true},
-                 new Order{Id=2, UserId=It.IsAny<int>(), AddressId=It.IsAny<int>(), OrderStatusId = It.IsAny<int>(), Count=It.IsAny<int>(), CreateDate=DateTime.Now, Active=true},
+                new Order{Id=1, UserId=It.IsAny<int>(), AddressId=It.IsAny<int>(), OrderStatusId = It.IsAny<int>(), CreateDate=DateTime.Now, Active=true},
+                 new Order{Id=2, UserId=It.IsAny<int>(), AddressId=It.IsAny<int>(), OrderStatusId = It.IsAny<int>(), CreateDate=DateTime.Now, Active=true},
             };
             _mockOrderDal.Setup(m => m.GetAll(null)).Returns(_mockOrders);
 
@@ -59,7 +59,6 @@ namespace Tests.Business
                 UserId = It.IsAny<int>(),
                 AddressId = It.IsAny<int>(),
                 OrderStatusId = It.IsAny<int>(),
-                Count = It.IsAny<int>(),
                 CreateDate = DateTime.Now,
                 Active = true
             };
@@ -77,7 +76,6 @@ namespace Tests.Business
                 UserId = 0,
                 AddressId = It.IsAny<int>(),
                 OrderStatusId = It.IsAny<int>(),
-                Count = It.IsAny<int>(),
                 CreateDate = DateTime.Now,
                 Active = true
             };
@@ -96,7 +94,6 @@ namespace Tests.Business
                 UserId = It.IsAny<int>(),
                 AddressId = It.IsAny<int>(),
                 OrderStatusId = It.IsAny<int>(),
-                Count = It.IsAny<int>(),
                 CreateDate = DateTime.Now,
                 Active = true
             };
@@ -114,7 +111,6 @@ namespace Tests.Business
                 UserId = It.IsAny<int>(),
                 AddressId = It.IsAny<int>(),
                 OrderStatusId = It.IsAny<int>(),
-                Count = It.IsAny<int>(),
                 CreateDate = DateTime.Now,
                 Active = true
             };
