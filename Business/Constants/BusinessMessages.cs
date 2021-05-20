@@ -66,5 +66,11 @@ namespace Business.Constants
         public static string OrderStatusAdded = "Sifariş statusu əlavə edildi";
         public static string OrderStatusDeleted = "Sifariş statusu silindi";
         public static string OrderStatusUpdated = "Sifariş statusu güncəlləndi";
+
+        public static string AddressesListed = "Ünvanlar listələndi";
+        public static string AddressAdded = "Ünvan əlavə edildi";
+        public static string AddressDetailsListed = "Ünvan detayları listələndi";
+        public static string AddressDeleted = "Ünvan silindi";
+        public static string AddressUpdated = "Ünvan güncəlləndi";
     }
 }
