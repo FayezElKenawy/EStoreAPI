@@ -69,7 +69,6 @@ namespace Tests.Business
         [TestMethod]
         public void InvalidParameters_ThrowValidationException()
         {
-            IOrderService orderService = new OrderManager(_mockOrderDal.Object);
             Order order = new Order
             {
                 Id = 3,

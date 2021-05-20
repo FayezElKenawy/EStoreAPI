@@ -71,7 +71,6 @@ namespace Tests.Business
         [TestMethod]
         public void InvalidParameters_ThrowValidationException()
         {
-            IOrderDetailService service = new OrderDetailManager(_mockOrderDetailDal.Object);
             OrderDetail orderDetail = new OrderDetail
             {
                 Id = 1,

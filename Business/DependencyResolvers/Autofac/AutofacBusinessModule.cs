@@ -43,6 +43,9 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<OrderDetailManager>().As<IOrderDetailService>().SingleInstance();
             builder.RegisterType<EfOrderDetailDal>().As<IOrderDetailDal>().SingleInstance();
 
+            builder.RegisterType<OrderStatusManager>().As<IOrderStatusService>().SingleInstance();
+            builder.RegisterType<EfOrderStatusDal>().As<IOrderStatusDal>().SingleInstance();
+
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
             builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
 
