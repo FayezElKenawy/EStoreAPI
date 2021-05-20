@@ -50,9 +50,15 @@ namespace Business.Constants
         public static string BasketDeleted = "Səbət silindi";
 
         public static string OrdersListed = "Sifarişlər listələndi";
-        public static string OrderDetailsListed = "Sifariş məlumatları listələndi";
+        public static string OrderDetailsListed = "Sifariş detayları listələndi";
         public static string OrderAdded = "Sifariş əlavə edildi";
         public static string OrderDeleted = "Sifariş silindi";
         public static string OrderUpdated = "Sifariş güncəlləndi";
+
+        public static string AllOrderDetailsListed = "Sifariş məlumatları siyahısı listələndi";
+        public static string OrderDetailInfoListed = "Sifariş məlumatı detayı listələndi";
+        public static string OrderDetailAdded = "Sifariş məlumatı əlavə edildi";
+        public static string OrderDetailDeleted = "Sifariş məlumatı silindi";
+        public static string OrderDetailUpdated = "Sifariş məlumatı güncəlləndi";
     }
 }
