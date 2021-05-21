@@ -41,7 +41,7 @@ namespace Business.Constants
         public static string UserDetailsListed = "İstifadəçi məluamtları listələndi";
         public static string UserDeleted = "istifadəçi silindi";
         public static string UserUpdated = "İstifadəçi güncəlləndi";
-        public static string GivenUserOperationClaimsListed = "İstifadəçi icazələri listələndi";
+        public static string GivenUserOperationClaimsListed = "Tələb olunan istifadəçi icazələri listələndi";
 
         public static string BasketAdded = "Səbət əlavə edildi";
         public static string BasketsListed = "Səbətlər listələndi";
@@ -72,5 +72,11 @@ namespace Business.Constants
         public static string AddressDetailsListed = "Ünvan detayları listələndi";
         public static string AddressDeleted = "Ünvan silindi";
         public static string AddressUpdated = "Ünvan güncəlləndi";
+
+        public static string OperationClaimsListed = "Rollar listələndi";
+        public static string OperationClaimDetailsListed = "Rol detayları listələndi";
+        public static string OperationClaimAdded = "Rol əlavə edildi";
+        public static string OperationClaimDeleted = "Rol silindi";
+        public static string OperationClaimUpdated = "Rol güncəlləndi";
     }
 }

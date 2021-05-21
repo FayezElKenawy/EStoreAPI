@@ -49,6 +49,9 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<AddressManager>().As<IAddressService>().SingleInstance();
             builder.RegisterType<EfAddressDal>().As<IAddressDal>().SingleInstance();
 
+            builder.RegisterType<OperationClaimManager>().As<IOperationClaimService>().SingleInstance();
+            builder.RegisterType<EfOperationClaimDal>().As<IOperationClaimDal>().SingleInstance();
+
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
             builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
 
