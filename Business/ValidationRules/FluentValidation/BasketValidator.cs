@@ -14,8 +14,6 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(b => b.ProductId).GreaterThan(0);
             RuleFor(b => b.Count).NotEmpty();
             RuleFor(b => b.Count).GreaterThan(0);
-            RuleFor(b => b.UserId).NotEmpty();
-            RuleFor(b => b.UserId).GreaterThan(0);
         }
     }
 }

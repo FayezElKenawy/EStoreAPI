@@ -1,27 +1,40 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Extensions;
 using Core.Utilities.Business;
+using Core.Utilities.IoC;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Business.Concrete
 {
     public class BasketManager : IBasketService
     {
         readonly IBasketDal _basketDal;
+        readonly IHttpContextAccessor _httpContextAccessor;
 
         public BasketManager(IBasketDal basketDal)
         {
             _basketDal = basketDal;
+            _httpContextAccessor = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();
         }
 
         [ValidationAspect(typeof(BasketValidator))]
         public IResult Add(Basket basket)
         {
+            basket.UserId = Convert.ToInt32(_httpContextAccessor.HttpContext.User.Claims.ElementAt(0).Value);
+            basket.CreateDate = DateTime.Now;
+            basket.Active = true;
+
             _basketDal.Add(basket);
             return new SuccessResult(BusinessMessages.BasketAdded);
         }
