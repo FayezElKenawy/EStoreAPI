@@ -8,12 +8,6 @@ namespace Business.ValidationRules.FluentValidation
 {
     public class BasketValidator : AbstractValidator<Basket>
     {
-        public BasketValidator()
-        {
-            RuleFor(b => b.ProductId).NotEmpty();
-            RuleFor(b => b.ProductId).GreaterThan(0);
-            RuleFor(b => b.Count).NotEmpty();
-            RuleFor(b => b.Count).GreaterThan(0);
-        }
+        public BasketValidator() { }
     }
 }

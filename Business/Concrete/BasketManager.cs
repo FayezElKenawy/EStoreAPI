@@ -22,15 +22,16 @@ namespace Business.Concrete
         readonly IBasketDal _basketDal;
         readonly IHttpContextAccessor _httpContextAccessor;
 
-        public BasketManager(IBasketDal basketDal)
+        public BasketManager(IBasketDal basketDal, IHttpContextAccessor httpContextAccessor)
         {
             _basketDal = basketDal;
-            _httpContextAccessor = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [ValidationAspect(typeof(BasketValidator))]
         public IResult Add(Basket basket)
         {
+            var id = _httpContextAccessor.HttpContext.User.Claims.ElementAt(0).Value;
             basket.UserId = Convert.ToInt32(_httpContextAccessor.HttpContext.User.Claims.ElementAt(0).Value);
             basket.CreateDate = DateTime.Now;
             basket.Active = true;
@@ -65,7 +66,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(BasketValidator))]
         public IResult Update(Basket basket)
         {
-            _basketDal.Add(basket);
+            _basketDal.Update(basket);
             return new SuccessResult(BusinessMessages.BasketUpdated);
         }
 
