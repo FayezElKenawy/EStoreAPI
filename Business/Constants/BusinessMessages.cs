@@ -84,5 +84,11 @@ namespace Business.Constants
         public static string UserOperationClaimAdded = "İstifadəçi-Rol əlavə edildi";
         public static string UserOperationClaimUpdated = "İsifadəçi-Rol güncəlləndi";
         public static string UserOperationClaimDeleted = "İstifadəçi-Rol silindi";
+
+        public static string AllBasketDetailsListed = "Səbət detayları siyahısı listələndi";
+        public static string BasketDetailInfoListed = "Səbət məlumatı detayı listələndi";
+        public static string BasketDetailAdded = "Səbət detayı əlavə edildi";
+        public static string BasketDetailUpdated = "Səbət detayı güncəlləndi";
+        public static string BasketDetailDeleted = "Səbət detayı silindi";
     }
 }

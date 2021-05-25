@@ -27,5 +27,6 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<OrderStatus> OrderStatuses { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<BasketDetail> BasketDetails { get; set; }
     }
 }
