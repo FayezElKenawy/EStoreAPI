@@ -59,6 +59,8 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<BasketDetailManager>().As<IBasketDetailService>().SingleInstance();
             builder.RegisterType<EfBasketDetailDal>().As<IBasketDetailDal>().SingleInstance(); ;
 
+            builder.RegisterType<BasketDetailDtoManager>().As<IBasketDetailDtoService>().SingleInstance();
+
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
             builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance(); ;
 

@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -17,8 +19,11 @@ namespace Business.Concrete
             _basketDetailDal = basketDetailDal;
         }
 
+        [ValidationAspect(typeof(BasketDetailDtoValidator))]
         public IResult Add(BasketDetail basketDetail)
         {
+            basketDetail.CreateDate = System.DateTime.Now;
+            basketDetail.Active = true;
             _basketDetailDal.Add(basketDetail);
             return new SuccessResult(BusinessMessages.BasketDetailAdded);
         }
@@ -45,6 +50,7 @@ namespace Business.Concrete
             return new ErrorDataResult<BasketDetail>();
         }
 
+        [ValidationAspect(typeof(BasketDetailDtoValidator))]
         public IResult Update(BasketDetail basketDetail)
         {
             _basketDetailDal.Update(basketDetail);

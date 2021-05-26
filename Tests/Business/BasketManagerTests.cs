@@ -45,7 +45,7 @@ namespace Tests.Business
         [TestMethod]
         public void GetAll_AllBasketsCanListed()
         {
-            IBasketService basketService = new BasketManager(_mockBasketDal.Object, _mockAccessor.Object);
+            IBasketService basketService = new BasketManager(_mockBasketDal.Object);
             List<Basket> baskets = basketService.GetAll().Data;
             Assert.AreEqual(2, baskets.Count);
         }
@@ -60,7 +60,7 @@ namespace Tests.Business
         [TestMethod]
         public void Add_AddBasket_ReturnTrueResult()
         {
-            IBasketService basketService = new BasketManager(_mockBasketDal.Object, _mockAccessor.Object);
+            IBasketService basketService = new BasketManager(_mockBasketDal.Object);
             Basket basket = new Basket
             {
                 Id = 1,
@@ -90,8 +90,7 @@ namespace Tests.Business
         [TestMethod]
         public void Update_UpdateBasket_ReturnTrueResult()
         {
-            IBasketService basketService = new BasketManager(_mockBasketDal.Object, _mockAccessor.Object);
-
+            IBasketService basketService = new BasketManager(_mockBasketDal.Object);
             Basket basket = new Basket
             {
                 Id = 1,
@@ -106,7 +105,7 @@ namespace Tests.Business
         [TestMethod]
         public void Delete_DeleteBasket_ReturnTrueResult()
         {
-            IBasketService basketService = new BasketManager(_mockBasketDal.Object, _mockAccessor.Object);
+            IBasketService basketService = new BasketManager(_mockBasketDal.Object);
             Basket basket = new Basket
             {
                 Id = 1,

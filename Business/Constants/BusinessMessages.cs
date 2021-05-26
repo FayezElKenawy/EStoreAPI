@@ -90,5 +90,9 @@ namespace Business.Constants
         public static string BasketDetailAdded = "Səbət detayı əlavə edildi";
         public static string BasketDetailUpdated = "Səbət detayı güncəlləndi";
         public static string BasketDetailDeleted = "Səbət detayı silindi";
+
+        public static string AllBasketDetailDtosListed = "Səbət DTO-lar listələndi";
+        public static string AllActiveBasketDetailDtosListed = "Aktiv Səbət DTO-lar listələndi";
+        public static string BasketDetailsAdded = "Səbət məluamtları əlavə edildi";
     }
 }
