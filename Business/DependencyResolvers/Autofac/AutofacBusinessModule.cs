@@ -57,12 +57,10 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EfUserOperationClaimDal>().As<IUserOperationClaimDal>().SingleInstance();
 
             builder.RegisterType<BasketDetailManager>().As<IBasketDetailService>().SingleInstance();
-            builder.RegisterType<EfBasketDetailDal>().As<IBasketDetailDal>().SingleInstance(); ;
-
-            builder.RegisterType<BasketDetailDtoManager>().As<IBasketDetailDtoService>().SingleInstance();
+            builder.RegisterType<EfBasketDetailDal>().As<IBasketDetailDal>().SingleInstance();
 
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
-            builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance(); ;
+            builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
 
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().SingleInstance();
             builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();

@@ -6,25 +6,51 @@ using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Business.Concrete
 {
     public class BasketDetailManager : IBasketDetailService
     {
         private readonly IBasketDetailDal _basketDetailDal;
+        private readonly IBasketService _basketService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public BasketDetailManager(IBasketDetailDal basketDetailDal)
+        public BasketDetailManager(IBasketDetailDal basketDetailDal, IBasketService basketService, IHttpContextAccessor httpContextAccessor)
         {
             _basketDetailDal = basketDetailDal;
+            _basketService = basketService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [ValidationAspect(typeof(BasketDetailDtoValidator))]
-        public IResult Add(BasketDetail basketDetail)
+        public IResult Add(List<BasketDetailDto> dtos)
         {
-            basketDetail.CreateDate = System.DateTime.Now;
-            basketDetail.Active = true;
-            _basketDetailDal.Add(basketDetail);
+            var result = BusinessRules.Run(CheckToken(), CreateBasketForUserIfNotHave());
+
+            if (result != null)
+            {
+                return new ErrorResult(result.Message);
+            }
+
+            foreach (var dto in dtos)
+            {
+                BasketDetail basketDetail = new BasketDetail
+                {
+                    BasketId = GetBasketByUserId().Data.Id,
+                    ProductId = dto.ProductId,
+                    Count = dto.Count,
+                    CreateDate = DateTime.Now,
+                    Active = true
+                };
+
+                // _basketDetailDal.Add(basketDetail);
+            }
+
             return new SuccessResult(BusinessMessages.BasketDetailAdded);
         }
 
@@ -69,5 +95,50 @@ namespace Business.Concrete
 
             return new ErrorResult();
         }
+
+        private IResult CheckToken()
+        {
+            int userId = GetUserIdFromToken();
+            if (userId == 0) return new ErrorResult(SystemMessages.CouldNotAcceptedVerifiedToken);
+
+            return new SuccessResult();
+        }
+
+        private IResult CreateBasketForUserIfNotHave()
+        {
+            int userId = GetUserIdFromToken();
+            if (userId == 0) return new ErrorResult(SystemMessages.CouldNotAcceptedVerifiedToken);
+
+            var result = _basketService.GetByUserId(userId).Data;
+
+            if (result == null)
+            {
+                _basketService.Add(new Basket { UserId = userId });
+            }
+
+            return new SuccessResult();
+        }
+
+        private IDataResult<Basket> GetBasketByUserId()
+        {
+            int userId = GetUserIdFromToken();
+            var result = _basketService.GetByUserId(userId).Data;
+
+            return new SuccessDataResult<Basket>(result);
+        }
+
+        private int GetUserIdFromToken()
+        {
+            try
+            {
+                return Convert.ToInt32(_httpContextAccessor.HttpContext.User.Claims.ElementAt(0).Value);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
     }
 }

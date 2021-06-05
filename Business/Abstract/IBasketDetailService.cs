@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Results;
 using Entities.Concrete;
+using Entities.DTOs;
 using System.Collections.Generic;
 
 namespace Business.Abstract
@@ -8,7 +9,7 @@ namespace Business.Abstract
     {
         IDataResult<List<BasketDetail>> GetAll();
         IDataResult<BasketDetail> GetById(int id);
-        IResult Add(BasketDetail basketDetail);
+        IResult Add(List<BasketDetailDto> dtos);
         IResult Update(BasketDetail basketDetail);
         IResult Delete(BasketDetail basketDetail);
     }

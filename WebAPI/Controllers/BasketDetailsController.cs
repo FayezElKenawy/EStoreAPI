@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -47,9 +48,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(BasketDetail basketDetail)
+        public IActionResult Add(List<BasketDetailDto> dtos)
         {
-            var result = _basketDetailService.Add(basketDetail);
+            var result = _basketDetailService.Add(dtos);
 
             if (result.Success)
             {

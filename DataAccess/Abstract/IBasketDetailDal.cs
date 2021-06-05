@@ -9,6 +9,6 @@ namespace DataAccess.Abstract
 {
     public interface IBasketDetailDal : IEntityRepository<BasketDetail>
     {
-        public List<BasketDetailDto> GetAllBasketDetailDtos(Expression<Func<BasketDetailDto, bool>> expression = null);
+
     }
 }
