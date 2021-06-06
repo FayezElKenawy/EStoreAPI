@@ -1,6 +1,8 @@
 ﻿using Core.Entities.Concrete;
+using DataAccess.Concrete.EntityFramework.Configs;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,6 +14,11 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=ACER; Database=EStore; Trusted_Connection=true;");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            new BasketDetailConfig().Configure(modelBuilder.Entity<BasketDetail>());
         }
 
         public DbSet<Country> Countries { get; set; }

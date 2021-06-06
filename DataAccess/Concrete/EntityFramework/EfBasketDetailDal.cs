@@ -13,14 +13,6 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfBasketDetailDal : EfEntityRepositoryBase<BasketDetail, EStoreContext>, IBasketDetailDal
     {
-        public new List<BasketDetail> GetAll(Expression<Func<BasketDetail, bool>> expression = null)
-        {
-            using (EStoreContext context = new EStoreContext())
-            {
-                return expression == null
-                   ? context.Set<BasketDetail>().Include(b => b.Basket).ToList()
-                   : context.Set<BasketDetail>().Where(expression).ToList();
-            }
-        }
+
     }
 }
