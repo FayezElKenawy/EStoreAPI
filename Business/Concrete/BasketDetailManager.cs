@@ -48,7 +48,7 @@ namespace Business.Concrete
                     Active = true
                 };
 
-                // _basketDetailDal.Add(basketDetail);
+                _basketDetailDal.Add(basketDetail);
             }
 
             return new SuccessResult(BusinessMessages.BasketDetailAdded);
