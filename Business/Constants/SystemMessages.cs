@@ -16,6 +16,6 @@ namespace Business.Constants
         public static string UserRegistered = "İstifadəçi sistemə əlavə olundu";
         public static string UserAlreadyExists = "Belə istifadəçi artıq mövcuddur";
 
-        public static string CouldNotAcceptedVerifiedToken = "Göndərilən token xətalıdır";
+        public static string WrongTokenSent = "Göndərilən token xətalıdır";
     }
 }

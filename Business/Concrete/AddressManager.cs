@@ -49,6 +49,11 @@ namespace Business.Concrete
             return new ErrorDataResult<Address>();
         }
 
+        public IDataResult<Address> GetByUserIdActice(int userId)
+        {
+            return new SuccessDataResult<Address>(_addressDal.Get(c => c.UserId == userId && c.Active == true), BusinessMessages.AddressDetailsListed);
+        }
+
         [ValidationAspect(typeof(AddressValidator))]
         public IResult Update(Address address)
         {

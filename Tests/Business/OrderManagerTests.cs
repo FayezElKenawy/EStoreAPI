@@ -62,7 +62,7 @@ namespace Tests.Business
                 CreateDate = DateTime.Now,
                 Active = true
             };
-            var result = orderService.Add(order);
+            var result = orderService.AddAsEntity(order);
             Assert.IsTrue(result.Success);
         }
 

@@ -65,6 +65,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<BasketDetail>>(_basketDetailDal.GetAll(), BusinessMessages.AllBasketDetailsListed);
         }
 
+        public IDataResult<List<BasketDetail>> GetAllByUserIdActive(int userId)
+        {
+            return new SuccessDataResult<List<BasketDetail>>(_basketDetailDal.GetAll(b => b.Basket.UserId == userId && b.Active == true), BusinessMessages.ActiveBasketDetailsForUserListed);
+        }
+
         public IDataResult<BasketDetail> GetById(int id)
         {
             var result = BusinessRules.Run(CheckIfEntityIdValid(id));
@@ -99,7 +104,7 @@ namespace Business.Concrete
         private IResult CheckToken()
         {
             int userId = GetUserIdFromToken();
-            if (userId == 0) return new ErrorResult(SystemMessages.CouldNotAcceptedVerifiedToken);
+            if (userId == 0) return new ErrorResult(SystemMessages.WrongTokenSent);
 
             return new SuccessResult();
         }
@@ -107,7 +112,7 @@ namespace Business.Concrete
         private IResult CreateBasketForUserIfNotHave()
         {
             int userId = GetUserIdFromToken();
-            if (userId == 0) return new ErrorResult(SystemMessages.CouldNotAcceptedVerifiedToken);
+            if (userId == 0) return new ErrorResult(SystemMessages.WrongTokenSent);
 
             var result = _basketService.GetByUserId(userId).Data;
 

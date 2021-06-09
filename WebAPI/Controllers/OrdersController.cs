@@ -49,7 +49,7 @@ namespace WebAPI.Controllers
         [HttpPost("add")]
         public IActionResult Add(Order order)
         {
-            var result = _orderService.Add(order);
+            var result = _orderService.AddAsEntity(order);
 
             if (result.Success)
             {
