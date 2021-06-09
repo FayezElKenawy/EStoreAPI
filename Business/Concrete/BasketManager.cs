@@ -58,9 +58,15 @@ namespace Business.Concrete
             return new ErrorDataResult<Basket>();
         }
 
-        public IDataResult<Basket> GetByUserId(int userId)
+        public IDataResult<Basket> GetByUserIdActive(int userId)
         {
-            return new SuccessDataResult<Basket>(_basketDal.Get(b => b.UserId == userId));
+            return new SuccessDataResult<Basket>(_basketDal.Get(b => b.UserId == userId && b.Active == true));
+        }
+
+        public IResult SetPassive(int id)
+        {
+            _basketDal.SetPassive(id);
+            return new SuccessResult(BusinessMessages.BasketPassived);
         }
 
         [ValidationAspect(typeof(BasketValidator))]

@@ -10,5 +10,15 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfBasketDal : EfEntityRepositoryBase<Basket, EStoreContext>, IBasketDal
     {
+        public void SetPassive(int id)
+        {
+            using (EStoreContext context = new EStoreContext())
+            {
+                Basket basket = new Basket { Id = id, Active = false };
+                context.Baskets.Attach(basket);
+                context.Entry(basket).Property(b => b.Active).IsModified = true;
+                context.SaveChanges();
+            };
+        }
     }
 }

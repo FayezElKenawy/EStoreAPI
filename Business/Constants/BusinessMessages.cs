@@ -97,5 +97,7 @@ namespace Business.Constants
 
         public static string ActiveBasketDetailsForUserListed = "İstifadəçinin aktiv səbət detayları listələndi";
         public static string ProductsOrdered = "Məhsullar sifariş edildi";
+        public static string BasketDetailsListedByBasketId = "Səbət detayları səbət nömrəsinə (id) görə listələndi";
+        public static string BasketPassived = "Səbət passiv edildi";
     }
 }

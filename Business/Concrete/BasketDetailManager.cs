@@ -30,18 +30,19 @@ namespace Business.Concrete
         [ValidationAspect(typeof(BasketDetailDtoValidator))]
         public IResult Add(List<BasketDetailDto> dtos)
         {
-            var result = BusinessRules.Run(CheckToken(), CreateBasketForUserIfNotHave());
+            var result = BusinessRules.Run(CheckToken());
 
             if (result != null)
             {
                 return new ErrorResult(result.Message);
             }
 
+            int basketId = CreateNewBasketIfNotHaveActive().Data.Id;
             foreach (var dto in dtos)
             {
                 BasketDetail basketDetail = new BasketDetail
                 {
-                    BasketId = GetBasketByUserId().Data.Id,
+                    BasketId = basketId,
                     ProductId = dto.ProductId,
                     Count = dto.Count,
                     CreateDate = DateTime.Now,
@@ -65,9 +66,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<BasketDetail>>(_basketDetailDal.GetAll(), BusinessMessages.AllBasketDetailsListed);
         }
 
-        public IDataResult<List<BasketDetail>> GetAllByUserIdActive(int userId)
+        public IDataResult<List<BasketDetail>> GetAllByBasketId(int basketId)
         {
-            return new SuccessDataResult<List<BasketDetail>>(_basketDetailDal.GetAll(b => b.Basket.UserId == userId && b.Active == true), BusinessMessages.ActiveBasketDetailsForUserListed);
+            return new SuccessDataResult<List<BasketDetail>>(_basketDetailDal.GetAll(b => b.BasketId == basketId), BusinessMessages.BasketDetailsListedByBasketId);
         }
 
         public IDataResult<BasketDetail> GetById(int id)
@@ -109,29 +110,6 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        private IResult CreateBasketForUserIfNotHave()
-        {
-            int userId = GetUserIdFromToken();
-            if (userId == 0) return new ErrorResult(SystemMessages.WrongTokenSent);
-
-            var result = _basketService.GetByUserId(userId).Data;
-
-            if (result == null)
-            {
-                _basketService.Add(new Basket { UserId = userId });
-            }
-
-            return new SuccessResult();
-        }
-
-        private IDataResult<Basket> GetBasketByUserId()
-        {
-            int userId = GetUserIdFromToken();
-            var result = _basketService.GetByUserId(userId).Data;
-
-            return new SuccessDataResult<Basket>(result);
-        }
-
         private int GetUserIdFromToken()
         {
             try
@@ -142,7 +120,25 @@ namespace Business.Concrete
             {
                 return 0;
             }
+        }
 
+        private IDataResult<Basket> CreateNewBasketIfNotHaveActive()
+        {
+            int userId = GetUserIdFromToken();
+            var result = _basketService.GetByUserIdActive(userId).Data;
+
+            if(result != null) 
+            {
+                return new SuccessDataResult<Basket>(result);
+            }
+
+            Basket basket = new Basket
+            {
+                UserId = GetUserIdFromToken()
+            };
+
+            _basketService.Add(basket);
+            return new SuccessDataResult<Basket>(basket, BusinessMessages.BasketAdded);
         }
 
     }

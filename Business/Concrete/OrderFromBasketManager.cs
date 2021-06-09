@@ -21,14 +21,16 @@ namespace Business.Concrete
         private readonly IBasketDetailService _basketDetailService;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IProductService _productService;
+        private readonly IBasketService _basketService;
 
-        public OrderFromBasketManager(IOrderDetailService orderDetailService, IOrderService orderService, IBasketDetailService basketDetailService, IHttpContextAccessor httpContextAccessor, IProductService productService)
+        public OrderFromBasketManager(IOrderDetailService orderDetailService, IOrderService orderService, IBasketDetailService basketDetailService, IHttpContextAccessor httpContextAccessor, IProductService productService, IBasketService basketService)
         {
             _orderDetailService = orderDetailService;
             _orderService = orderService;
             _basketDetailService = basketDetailService;
             _httpContextAccessor = httpContextAccessor;
             _productService = productService;
+            _basketService = basketService;
         }
 
         [ValidationAspect(typeof(OrderFromBasketDtoValidator))]
@@ -42,7 +44,8 @@ namespace Business.Concrete
             }
 
             int userId = GetUserIdFromToken();
-            var basketDetails = _basketDetailService.GetAllByUserIdActive(userId).Data;
+            int basketId = _basketService.GetByUserIdActive(userId).Data.Id;
+            var basketDetails = _basketDetailService.GetAllByBasketId(basketId).Data;
 
             foreach (var basketDto in basketDetails)
             {
@@ -59,6 +62,7 @@ namespace Business.Concrete
                 _orderDetailService.Add(orderDetail);
             }
 
+            _basketService.SetPassive(basketId);
             return new SuccessResult(BusinessMessages.ProductsOrdered);
         }
 

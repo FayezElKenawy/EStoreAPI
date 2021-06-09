@@ -8,7 +8,7 @@ namespace Business.Abstract
     public interface IBasketDetailService
     {
         IDataResult<List<BasketDetail>> GetAll();
-        IDataResult<List<BasketDetail>> GetAllByUserIdActive(int userId);
+        IDataResult<List<BasketDetail>> GetAllByBasketId(int basketId);
         IDataResult<BasketDetail> GetById(int id);
         IResult Add(List<BasketDetailDto> dtos);
         IResult Update(BasketDetail basketDetail);
