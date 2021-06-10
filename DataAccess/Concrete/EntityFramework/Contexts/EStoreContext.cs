@@ -19,6 +19,7 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             new BasketDetailConfig().Configure(modelBuilder.Entity<BasketDetail>());
+            new OrderConfig().Configure(modelBuilder.Entity<Order>());
         }
 
         public DbSet<Country> Countries { get; set; }
