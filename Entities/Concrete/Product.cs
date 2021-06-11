@@ -11,5 +11,10 @@ namespace Entities.Concrete
         public string Code { get; set; }
         public int Stock { get; set; }
         public decimal Price { get; set; }
+
+        //Navigation properties
+
+        public virtual Brand Brand { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

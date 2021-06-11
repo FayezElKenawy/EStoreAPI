@@ -20,6 +20,7 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         {
             new BasketDetailConfig().Configure(modelBuilder.Entity<BasketDetail>());
             new OrderConfig().Configure(modelBuilder.Entity<Order>());
+            new ProductConfig().Configure(modelBuilder.Entity<Product>());
         }
 
         public DbSet<Country> Countries { get; set; }
