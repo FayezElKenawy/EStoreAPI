@@ -26,6 +26,13 @@ namespace Business.Concrete
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
+            var result = BusinessRules.Run(CheckIfProductNameExists(product.Name));
+
+            if (result != null)
+            {
+                return new ErrorResult(result.Message);
+            }
+
             product.Code = _codeGeneratorService.GenerateCode(product);
             product.CreateDate = DateTime.Now;
             product.Active = true;
@@ -74,6 +81,18 @@ namespace Business.Concrete
             }
 
             return new ErrorResult();
+        }
+
+        private IResult CheckIfProductNameExists(string name)
+        {
+            var result = _productDal.Get(p => p.Name == name);
+
+            if (result != null)
+            {
+                return new ErrorResult(BusinessMessages.ProductNameAlreadyExists);
+            }
+
+            return new SuccessResult();
         }
     }
 }

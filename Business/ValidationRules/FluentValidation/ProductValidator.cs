@@ -21,6 +21,8 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(c => c.Code).MaximumLength(25);
             RuleFor(c => c.Price).NotEmpty();
             RuleFor(c => c.Price).GreaterThan(0);
+            RuleFor(c => c.Stock).NotEmpty();
+            RuleFor(c => c.Stock).GreaterThan(0);
         }
     }
 }

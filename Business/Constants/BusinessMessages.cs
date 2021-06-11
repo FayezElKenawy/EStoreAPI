@@ -99,5 +99,6 @@ namespace Business.Constants
         public static string ProductsOrdered = "Məhsullar sifariş edildi";
         public static string BasketDetailsListedByBasketId = "Səbət detayları səbət nömrəsinə (id) görə listələndi";
         public static string BasketPassived = "Səbət passiv edildi";
+        public static string ProductNameAlreadyExists = "Məhsul adı artıq istifadə olunub";
     }
 }
