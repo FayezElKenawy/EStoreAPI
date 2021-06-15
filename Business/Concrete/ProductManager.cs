@@ -66,6 +66,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Update(Product product)
         {
+            product.Code = _codeGeneratorService.GenerateCode(product);
             _productDal.Update(product);
             return new SuccessResult(BusinessMessages.ProductUpdated);
         }
